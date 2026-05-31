@@ -2,6 +2,7 @@
 
 **Pluvial Flood Risk Prediction using Machine Learning**  
 ENGG2112 Multi-disciplinary Engineering · Group 12 · University of Sydney
+
 This Github repo is used for the appendix of the ENGG2112 group report.
 
 ---
@@ -51,18 +52,6 @@ floodmap-intelligence/
 📎 https://www.kaggle.com/datasets/oladapokayodeabiodun/pluvial-flood-dataset
 
 The dataset covers the **Ibadan metropolitan region, Nigeria** and contains 144,401 georeferenced spatial observations with 9 input features and 1 categorical target label.
-
-| Feature | Description |
-|---------|-------------|
-| X, Y | Spatial coordinates (longitude, latitude) |
-| Slope | Terrain gradient (°) |
-| Curvature | Surface curvature — negative = concave (collects water) |
-| Aspect | Compass direction of slope face (°) |
-| TWI | Topographic Wetness Index — higher = wetter terrain |
-| FA | Flow Accumulation — upstream contributing area |
-| Drainage | Drainage density (km/km²) |
-| Rainfall | Accumulated rainfall (mm) |
-| SUSCEP | Target: No\_Flood · Low · Moderate · High · Very\_High |
 
 > **Note:** Download the dataset from Kaggle and place `Pluvial_Flood_Dataset.xlsx` in `~/Downloads/` before running any model or the app.
 
@@ -125,36 +114,6 @@ The app will open at `http://localhost:8501` in your browser.
 | 🗺️ Flood Risk Map | Interactive map of test-set predictions colour-coded by risk level. Click any point for feature details |
 | 📊 Model Performance | CV accuracy, best hyperparameters, and feature descriptions |
 | ℹ️ About | Project overview and risk level guide |
-
----
-
-## 📊 Results Summary
-
-All models trained on a stratified random sample of 10,000 rows with 10-fold stratified cross-validation.
-
-### With Drainage (all 9 features)
-
-| Model | CV Accuracy | Macro ROC-AUC | Macro F1 |
-|-------|-------------|---------------|----------|
-| Random Forest | **100%** | 1.000 | 1.00 |
-| SVM | 90.03% | 0.993 | 0.90 |
-| KNN (k=11) | 79.39% | 0.963 | 0.80 |
-
-### Without Drainage (8 features)
-
-| Model | CV Accuracy | Macro ROC-AUC |
-|-------|-------------|---------------|
-| Random Forest | 29.08% | 0.601 |
-| SVM | 27.42% | 0.528 |
-| KNN (k=11) | 26.58% | 0.549 |
-
-> ⚠️ **Note on RF 100% accuracy:** Random Forest's perfect score reflects extreme Drainage dominance (92.88% Gini importance). The model learned a near-single-feature decision rule rather than a generalised classifier. SVM is the most robust model, achieving 90% accuracy with the most consistent per-class F1-scores.
-
----
-
-## 🔑 Key Finding — The Drainage Feature
-
-Drainage in this dataset refers to **drainage density** (total stream channel length per unit watershed area, km/km²) — not engineered stormwater infrastructure capacity. Higher drainage density means denser natural channel networks that respond faster to rainfall, increasing flood exposure. This is consistent with Abiodun (2020), who categorises drainage density as a top hydrological conditioning variable for pluvial flood prediction.
 
 ---
 
